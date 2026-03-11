@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dan Cafe | Cozy Coffee Moments in Maramag</title>
+  <meta
+    name="description"
+    content="Dan Cafe is a cozy coffee shop in Purok 2 North, Poblacion, Maramag, Bukidnon offering dine-in, curbside pickup, and delivery."
+  >
+  <meta name="theme-color" content="#050505">
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f1f1f1'/%3E%3Cg fill='none' stroke='%23050505' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 27h38l-2.5 14c-1.8 9.6-9.8 16.5-19.6 16.5S11.1 50.6 9.4 41L13 27Z'/%3E%3Cpath d='M19 27v10'/%3E%3Cpath d='M19 37h25'/%3E%3Cpath d='M29 27v6'/%3E%3Cpath d='M29 33h16'/%3E%3Cpath d='M29.5 8.5c6.4-5.7 14.6-3.4 17.3 2.8-6.5 5.8-14.6 3.3-17.3-2.8Z'/%3E%3Cpath d='M30.4 9.5c4.5 1.3 9.2 2.3 15.3 1.2'/%3E%3C/g%3E%3C/svg%3E"
+  >
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            espresso: "#1b1b1b",
+            mocha: "#3c3c3c",
+            crema: "#f1f1f1",
+            latte: "#d4d4d4",
+            caramel: "#7a7a7a",
+            roast: "#050505"
+          },
+          boxShadow: {
+            glow: "0 20px 45px rgba(0, 0, 0, 0.14)"
+          },
+          fontFamily: {
+            display: ["Georgia", "serif"],
+            body: ["Segoe UI", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(0, 0, 0, 0.08), transparent 32%),
+        linear-gradient(180deg, #fafafa 0%, #eaeaea 100%);
+    }
+
+    .grain {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grain::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .busy-bar.active {
+      background: linear-gradient(90deg, #111111, #666666);
+      color: #fafafa;
+    }
+
+    .logo-mark svg {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="font-body text-espresso">
+  <header class="sticky top-0 z-50 border-b border-white/40 bg-crema/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <a href="#home" class="flex items-center gap-3 text-roast">
+        <span class="logo-mark h-12 w-12 rounded-full bg-white p-2 shadow-sm">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M13 27h38l-2.5 14c-1.8 9.6-9.8 16.5-19.6 16.5S11.1 50.6 9.4 41L13 27Z"></path>
+            <path d="M19 27v10"></path>
+            <path d="M19 37h25"></path>
+            <path d="M29 27v6"></path>
+            <path d="M29 33h16"></path>
+            <path d="M29.5 8.5c6.4-5.7 14.6-3.4 17.3 2.8-6.5 5.8-14.6 3.3-17.3-2.8Z"></path>
+            <path d="M30.4 9.5c4.5 1.3 9.2 2.3 15.3 1.2"></path>
+          </svg>
+        </span>
+        <span>
+          <span class="block font-display text-2xl font-bold tracking-wide">Dan Cafe</span>
+          <span class="block text-[10px] font-semibold uppercase tracking-[0.35em] text-mocha">Maramag, Bukidnon</span>
+        </span>
+      </a>
+      <nav class="hidden items-center gap-6 text-sm font-semibold md:flex">
+        <a class="transition hover:text-caramel" href="#about">About</a>
+        <a class="transition hover:text-caramel" href="#menu">Menu</a>
+        <a class="transition hover:text-caramel" href="#gallery">Gallery</a>
+        <a class="transition hover:text-caramel" href="#reviews">Reviews</a>
+        <a class="transition hover:text-caramel" href="#location">Location</a>
+        <a class="transition hover:text-caramel" href="#contact">Contact</a>
+      </nav>
+      <button
+        id="menu-toggle"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-mocha/20 bg-white text-mocha md:hidden"
+        aria-label="Open navigation"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="hidden border-t border-mocha/10 bg-crema px-6 py-4 md:hidden">
+      <div class="flex flex-col gap-3 text-sm font-semibold">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#location">Location</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="grain relative">
+      <div class="mx-auto grid min-h-[calc(100vh-81px)] max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="relative z-10">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-mocha shadow-sm">
+            <span class="logo-mark h-6 w-6 text-roast">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M13 27h38l-2.5 14c-1.8 9.6-9.8 16.5-19.6 16.5S11.1 50.6 9.4 41L13 27Z"></path>
+                <path d="M19 27v10"></path>
+                <path d="M19 37h25"></path>
+                <path d="M29 27v6"></path>
+                <path d="M29 33h16"></path>
+                <path d="M29.5 8.5c6.4-5.7 14.6-3.4 17.3 2.8-6.5 5.8-14.6 3.3-17.3-2.8Z"></path>
+                <path d="M30.4 9.5c4.5 1.3 9.2 2.3 15.3 1.2"></path>
+              </svg>
+            </span>
+            4.9-star rated local favorite in Maramag
+          </span>
+          <h1 class="mt-6 font-display text-5xl font-bold leading-tight text-roast md:text-6xl">
+            Welcome to Dan Cafe
+          </h1>
+          <p class="mt-5 max-w-xl text-lg leading-8 text-mocha">
+            Great Coffee, Cozy Moments in Maramag. A warm, modern cafe experience with handcrafted drinks,
+            relaxed corners, and a welcoming community vibe.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#menu"
+              class="rounded-full bg-espresso px-6 py-3 text-sm font-semibold text-crema shadow-glow transition hover:bg-roast"
+            >
+              View Menu
+            </a>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Purok+2+North,+Poblacion,+Maramag,+Bukidnon"
+              target="_blank"
+              rel="noreferrer"
+              class="rounded-full border border-mocha/20 bg-white px-6 py-3 text-sm font-semibold text-mocha transition hover:border-caramel hover:text-caramel"
+            >
+              Get Directions
+            </a>
+          </div>
+          <div class="mt-10 grid max-w-2xl gap-4 sm:grid-cols-3">
+            <div class="rounded-3xl bg-white/80 p-5 shadow-sm">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Services</p>
+              <p class="mt-2 font-semibold">Dine-in, Pickup, Delivery</p>
+            </div>
+            <div class="rounded-3xl bg-white/80 p-5 shadow-sm">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Hours</p>
+              <p class="mt-2 font-semibold">Open daily until 9 PM</p>
+            </div>
+            <div class="rounded-3xl bg-white/80 p-5 shadow-sm">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Price</p>
+              <p class="mt-2 font-semibold">₱200 - ₱400 per person</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10">
+          <div class="absolute -left-8 top-10 h-40 w-40 rounded-full bg-caramel/15 blur-3xl"></div>
+          <div class="absolute -right-6 bottom-6 h-52 w-52 rounded-full bg-mocha/10 blur-3xl"></div>
+          <div class="relative overflow-hidden rounded-[2rem] border border-white/50 bg-white p-3 shadow-glow">
+            <img
+              src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80"
+              alt="Coffee cups and pastries at Dan Cafe"
+              class="h-[520px] w-full rounded-[1.5rem] object-cover"
+            >
+            <div class="absolute bottom-8 left-8 right-8 rounded-[1.5rem] bg-roast/75 p-5 text-crema backdrop-blur">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-xs uppercase tracking-[0.3em] text-latte">Now Serving</p>
+                  <p class="mt-2 text-xl font-semibold">Fresh espresso, pastries, and slow afternoons</p>
+                </div>
+                <div class="rounded-full bg-crema px-3 py-2 text-xs font-bold text-espresso">
+                  Cozy
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="mx-auto max-w-7xl px-6 py-20">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div class="rounded-[2rem] bg-gradient-to-br from-mocha to-espresso p-8 text-crema shadow-glow">
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="rounded-3xl bg-white/10 p-5">
+              <p class="text-sm uppercase tracking-[0.25em] text-latte">Atmosphere</p>
+              <p class="mt-3 text-2xl font-semibold">Cozy, modern, welcoming</p>
+            </div>
+            <div class="rounded-3xl bg-white/10 p-5">
+              <p class="text-sm uppercase tracking-[0.25em] text-latte">Community</p>
+              <p class="mt-3 text-2xl font-semibold">LGBTQ+ friendly and inclusive</p>
+            </div>
+          </div>
+          <p class="mt-8 text-sm leading-7 text-crema/85">
+            Built for coffee lovers, catch-up sessions, and quiet moments between busy days.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-caramel">About Us</p>
+          <h2 class="mt-4 font-display text-4xl font-bold text-roast">A neighborhood cafe with a warm local pulse</h2>
+          <p class="mt-6 text-base leading-8 text-mocha">
+            Dan Cafe brings specialty coffee and a relaxed atmosphere to Purok 2 North, Poblacion, Maramag,
+            Bukidnon. It is the kind of place where friends meet over iced lattes, families share pastries,
+            and solo guests can settle in with a favorite drink.
+          </p>
+          <p class="mt-4 text-base leading-8 text-mocha">
+            The space is designed to feel modern yet familiar, with welcoming service, cozy corners, and a
+            strong sense of community. Whether you are stopping by for dine-in, curbside pickup, or delivery,
+            Dan Cafe makes every visit feel easy and inviting.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm">Locally loved</span>
+            <span class="rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm">Relaxing atmosphere</span>
+            <span class="rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm">Great for hangouts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="bg-white/70 py-20">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.35em] text-caramel">Menu</p>
+            <h2 class="mt-3 font-display text-4xl font-bold text-roast">Signature sips and cafe favorites</h2>
+          </div>
+          <p class="max-w-2xl text-mocha">
+            Sample menu items below can be replaced with your final offerings and exact prices.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-3">
+          <article class="rounded-[2rem] border border-mocha/10 bg-crema p-7 shadow-sm">
+            <div class="mb-6 flex items-center gap-3">
+              <div class="rounded-2xl bg-caramel/15 p-3 text-caramel">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 3h8v5a4 4 0 1 1-8 0V3Z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 21h12"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 12v9"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 5h2a3 3 0 1 1 0 6h-2"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold text-roast">Coffee</h3>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Espresso</p>
+                  <p class="text-sm text-mocha/75">Bold and smooth single shot</p>
+                </div>
+                <span class="font-semibold">₱120</span>
+              </div>
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Latte</p>
+                  <p class="text-sm text-mocha/75">Creamy milk and rich espresso</p>
+                </div>
+                <span class="font-semibold">₱150</span>
+              </div>
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Cappuccino</p>
+                  <p class="text-sm text-mocha/75">Foamy, balanced, and aromatic</p>
+                </div>
+                <span class="font-semibold">₱150</span>
+              </div>
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="font-semibold">Iced Coffee</p>
+                  <p class="text-sm text-mocha/75">Refreshing chilled coffee blend</p>
+                </div>
+                <span class="font-semibold">₱160</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-[2rem] border border-mocha/10 bg-crema p-7 shadow-sm">
+            <div class="mb-6 flex items-center gap-3">
+              <div class="rounded-2xl bg-caramel/15 p-3 text-caramel">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v4"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 2v4"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14"></path>
+                  <rect x="4" y="4" width="16" height="16" rx="5"></rect>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold text-roast">Non-Coffee</h3>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Chocolate</p>
+                  <p class="text-sm text-mocha/75">Deep cocoa comfort drink</p>
+                </div>
+                <span class="font-semibold">₱140</span>
+              </div>
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Matcha</p>
+                  <p class="text-sm text-mocha/75">Earthy, vibrant, lightly sweet</p>
+                </div>
+                <span class="font-semibold">₱155</span>
+              </div>
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Milk Drinks</p>
+                  <p class="text-sm text-mocha/75">Vanilla, caramel, and classic milk blends</p>
+                </div>
+                <span class="font-semibold">₱135</span>
+              </div>
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="font-semibold">Iced Matcha Latte</p>
+                  <p class="text-sm text-mocha/75">Creamy and refreshing green tea</p>
+                </div>
+                <span class="font-semibold">₱165</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-[2rem] border border-mocha/10 bg-crema p-7 shadow-sm">
+            <div class="mb-6 flex items-center gap-3">
+              <div class="rounded-2xl bg-caramel/15 p-3 text-caramel">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 10h14l-1 8H6l-1-8Z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 10V8a3 3 0 1 1 6 0v2"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold text-roast">Snacks & Pastries</h3>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Butter Croissant</p>
+                  <p class="text-sm text-mocha/75">Flaky pastry baked golden</p>
+                </div>
+                <span class="font-semibold">₱95</span>
+              </div>
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Cinnamon Roll</p>
+                  <p class="text-sm text-mocha/75">Soft swirl with sweet glaze</p>
+                </div>
+                <span class="font-semibold">₱110</span>
+              </div>
+              <div class="flex items-start justify-between gap-4 border-b border-mocha/10 pb-4">
+                <div>
+                  <p class="font-semibold">Cheesecake Slice</p>
+                  <p class="text-sm text-mocha/75">Rich and creamy dessert favorite</p>
+                </div>
+                <span class="font-semibold">₱145</span>
+              </div>
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="font-semibold">Ham & Cheese Toast</p>
+                  <p class="text-sm text-mocha/75">Savory cafe snack for anytime</p>
+                </div>
+                <span class="font-semibold">₱130</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="mx-auto max-w-7xl px-6 py-20">
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-caramel">Gallery</p>
+          <h2 class="mt-3 font-display text-4xl font-bold text-roast">A look at the Dan Cafe experience</h2>
+        </div>
+        <p class="max-w-2xl text-mocha">
+          Coffee textures, bright pastries, and relaxed seating spaces that feel inviting from morning to evening.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <img
+          class="h-72 w-full rounded-[1.75rem] object-cover shadow-sm"
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80"
+          alt="Fresh coffee being poured"
+        >
+        <img
+          class="h-72 w-full rounded-[1.75rem] object-cover shadow-sm"
+          src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80"
+          alt="Barista preparing latte art"
+        >
+        <img
+          class="h-72 w-full rounded-[1.75rem] object-cover shadow-sm"
+          src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=900&q=80"
+          alt="Pastries and coffee on table"
+        >
+        <img
+          class="h-72 w-full rounded-[1.75rem] object-cover shadow-sm"
+          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80"
+          alt="Modern cafe interior"
+        >
+      </div>
+    </section>
+
+    <section id="reviews" class="bg-gradient-to-b from-transparent to-white/70 py-20">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div class="rounded-[2rem] bg-roast p-8 text-crema shadow-glow">
+            <p class="text-sm font-semibold uppercase tracking-[0.35em] text-latte">Reviews</p>
+            <h2 class="mt-4 font-display text-4xl font-bold">Loved by coffee fans</h2>
+            <div class="mt-6 flex items-end gap-4">
+              <span class="text-6xl font-bold">4.9</span>
+              <div class="pb-2">
+                <p class="text-xl text-latte">★★★★★</p>
+                <p class="text-sm text-crema/75">Customer satisfaction highlight</p>
+              </div>
+            </div>
+            <p class="mt-6 leading-8 text-crema/85">
+              Recent guests consistently mention the cozy atmosphere, welcoming service, fresh coffee aroma,
+              and food that makes Dan Cafe stand out in Maramag.
+            </p>
+          </div>
+
+          <div class="grid gap-5 md:grid-cols-2">
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">Rob Soler</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">Local Guide · 26 reviews · 75 photos</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                Posted February 23, 2026: "If you're ever in Maramag, Bukidnon, do yourself a favor and visit
+                Dan Cafe. It's one of those places that quietly exceeds expectations."
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: "Thank you, Doc Rob!"</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">Gerlie Galvadores</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">1 review · 4 photos</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                "I really love how accessible this place is. The coffee aroma alone is a win. Big thumbs up
+                for the salad with chicken topping. Highly recommended for coffee breaks and small group meetings."
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: "Thank you, Ma'am Gerlie!"</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">Jo Sutia</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">Local Guide · 622 reviews · 1,124 photos</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                "Good food and venue." The review also included a short detailed video highlight from the cafe.
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: 10% off one drink on the next visit.</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">Don Winard</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">Local Guide · 93 reviews · 381 photos</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                "Dan Cafe is really nice. The place is cozy and cool, the air is fresh, and the view from the
+                window is relaxing." He also mentioned being served a salad appetizer on arrival.
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: thanked the guest and offered 10% off one drink.</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">maria clarizza</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">Recent customer review</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                Food: 5. Service: 5. A short but strong rating that supports the cafe's consistent customer experience.
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: "Thank you!"</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">TAGA BUKID "lakwatsirong pobre" NI BAI</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">Local Guide · 60 reviews · 259 photos</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                Food: 4. Service: 4. A balanced review that still reflects a positive dine-in experience.
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: "Thank you!"</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">Novie Jane Barillo</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">Customer review</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                Price per person: Php 1-200. A useful note for guests looking for a cafe stop that feels affordable.
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: 10% off one drink on the next visit.</p>
+            </article>
+            <article class="rounded-[2rem] bg-white p-6 shadow-sm">
+              <p class="text-lg font-semibold text-roast">Archangel Pamintuan</p>
+              <p class="mt-1 text-xs uppercase tracking-[0.25em] text-mocha/60">Local Guide · 2 reviews · 9 photos</p>
+              <p class="mt-4 text-sm leading-7 text-mocha">
+                Service: Dine in. Another positive visit that reinforces Dan Cafe as a comfortable place to stay and enjoy the space.
+              </p>
+              <p class="mt-5 text-sm font-semibold text-caramel">Owner response: offered a 10% discount on any drink for the next visit.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 py-20">
+      <div class="grid gap-8 rounded-[2rem] bg-white p-8 shadow-glow lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-caramel">Popular Times</p>
+          <h2 class="mt-4 font-display text-4xl font-bold text-roast">When the cafe feels most lively</h2>
+          <p class="mt-5 max-w-xl leading-8 text-mocha">
+            A visual guide to busier hours. This sample indicator helps visitors pick a relaxed coffee break or join the peak cafe buzz.
+          </p>
+        </div>
+        <div>
+          <div class="grid grid-cols-7 gap-3 text-center text-sm font-semibold text-mocha">
+            <div class="busy-bar rounded-2xl border border-mocha/10 px-2 py-4">8 AM</div>
+            <div class="busy-bar rounded-2xl border border-mocha/10 px-2 py-4">10 AM</div>
+            <div class="busy-bar active rounded-2xl border border-mocha/10 px-2 py-4">12 PM</div>
+            <div class="busy-bar active rounded-2xl border border-mocha/10 px-2 py-4">2 PM</div>
+            <div class="busy-bar active rounded-2xl border border-mocha/10 px-2 py-4">4 PM</div>
+            <div class="busy-bar rounded-2xl border border-mocha/10 px-2 py-4">6 PM</div>
+            <div class="busy-bar rounded-2xl border border-mocha/10 px-2 py-4">8 PM</div>
+          </div>
+          <div class="mt-6 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-3xl bg-crema p-4">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Quiet</p>
+              <p class="mt-2 font-semibold">Morning coffee runs</p>
+            </div>
+            <div class="rounded-3xl bg-crema p-4">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Busiest</p>
+              <p class="mt-2 font-semibold">Lunch to late afternoon</p>
+            </div>
+            <div class="rounded-3xl bg-crema p-4">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Relaxed</p>
+              <p class="mt-2 font-semibold">Early evening visits</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="location" class="bg-white/70 py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-caramel">Location</p>
+          <h2 class="mt-4 font-display text-4xl font-bold text-roast">Visit Dan Cafe in Maramag</h2>
+          <div class="mt-8 space-y-5">
+            <div class="rounded-[1.5rem] bg-crema p-5">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Address</p>
+              <p class="mt-2 font-semibold">Purok 2 North, Poblacion, Maramag, Bukidnon</p>
+            </div>
+            <div class="rounded-[1.5rem] bg-crema p-5">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Phone</p>
+              <a class="mt-2 block font-semibold hover:text-caramel" href="tel:09543295018">0954 329 5018</a>
+            </div>
+            <div class="rounded-[1.5rem] bg-crema p-5">
+              <p class="text-xs uppercase tracking-[0.3em] text-mocha/70">Plus Code</p>
+              <p class="mt-2 font-semibold">Q274+PR Maramag, Bukidnon</p>
+            </div>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Purok+2+North,+Poblacion,+Maramag,+Bukidnon"
+              target="_blank"
+              rel="noreferrer"
+              class="rounded-full bg-espresso px-6 py-3 text-sm font-semibold text-crema transition hover:bg-roast"
+            >
+              Directions
+            </a>
+            <a
+              href="tel:09543295018"
+              class="rounded-full border border-mocha/20 bg-white px-6 py-3 text-sm font-semibold text-mocha transition hover:border-caramel hover:text-caramel"
+            >
+              Call Now
+            </a>
+          </div>
+        </div>
+
+        <div class="overflow-hidden rounded-[2rem] border border-mocha/10 bg-white p-3 shadow-sm">
+          <iframe
+            title="Dan Cafe location map"
+            src="https://www.google.com/maps?q=Purok%202%20North,%20Poblacion,%20Maramag,%20Bukidnon&z=15&output=embed"
+            class="h-[420px] w-full rounded-[1.5rem]"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="mx-auto max-w-7xl px-6 py-20">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="rounded-[2rem] bg-gradient-to-br from-espresso to-roast p-8 text-crema shadow-glow">
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-latte">Contact</p>
+          <h2 class="mt-4 font-display text-4xl font-bold">Plan your next cafe visit</h2>
+          <div class="mt-8 space-y-5">
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em] text-latte">Phone</p>
+              <a class="mt-2 block text-lg font-semibold hover:text-latte" href="tel:09543295018">0954 329 5018</a>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em] text-latte">Facebook</p>
+              <a
+                class="mt-2 inline-flex items-center gap-2 text-lg font-semibold hover:text-latte"
+                href="https://www.facebook.com/profile.php?id=61568389796597"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6H17V4.8c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5V11H7.5v3H10v8h3.5Z"></path>
+                </svg>
+                facebook.com
+              </a>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em] text-latte">Services</p>
+              <p class="mt-2 text-lg font-semibold">Dine-in, Curbside pickup, Delivery</p>
+            </div>
+          </div>
+
+          <div class="mt-8 flex gap-4">
+            <a
+              href="https://www.facebook.com/profile.php?id=61568389796597"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20"
+              aria-label="Facebook"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6H17V4.8c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.5V11H7.5v3H10v8h3.5Z"></path>
+              </svg>
+            </a>
+            <a
+              href="tel:09543295018"
+              class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20"
+              aria-label="Phone"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 4h3l2 5-2 1.5a16 16 0 0 0 5.5 5.5L15 14l5 2v3a2 2 0 0 1-2 2h-1C10 21 3 14 3 7V6a2 2 0 0 1 2-2Z"></path>
+              </svg>
+            </a>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Purok+2+North,+Poblacion,+Maramag,+Bukidnon"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20"
+              aria-label="Location"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s6-5.7 6-11a6 6 0 1 0-12 0c0 5.3 6 11 6 11Z"></path>
+                <circle cx="12" cy="10" r="2.5"></circle>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-[2rem] bg-white p-8 shadow-sm">
+          <p class="text-sm font-semibold uppercase tracking-[0.35em] text-caramel">Send a Message</p>
+          <form id="contact-form" class="mt-8 grid gap-5">
+            <div class="grid gap-5 md:grid-cols-2">
+              <label class="block">
+                <span class="mb-2 block text-sm font-semibold text-mocha">Name</span>
+                <input
+                  type="text"
+                  placeholder="Your name"
+                  class="w-full rounded-2xl border border-mocha/15 bg-crema px-4 py-3 outline-none transition focus:border-caramel"
+                >
+              </label>
+              <label class="block">
+                <span class="mb-2 block text-sm font-semibold text-mocha">Phone</span>
+                <input
+                  type="tel"
+                  placeholder="Your phone number"
+                  class="w-full rounded-2xl border border-mocha/15 bg-crema px-4 py-3 outline-none transition focus:border-caramel"
+                >
+              </label>
+            </div>
+            <label class="block">
+              <span class="mb-2 block text-sm font-semibold text-mocha">Email</span>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                class="w-full rounded-2xl border border-mocha/15 bg-crema px-4 py-3 outline-none transition focus:border-caramel"
+              >
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-semibold text-mocha">Message</span>
+              <textarea
+                rows="6"
+                placeholder="Ask about reservations, group orders, or delivery."
+                class="w-full rounded-2xl border border-mocha/15 bg-crema px-4 py-3 outline-none transition focus:border-caramel"
+              ></textarea>
+            </label>
+            <button
+              type="submit"
+              class="inline-flex w-full items-center justify-center rounded-full bg-espresso px-6 py-3 text-sm font-semibold text-crema transition hover:bg-roast sm:w-auto"
+            >
+              Send Inquiry
+            </button>
+            <p id="form-status" class="text-sm text-mocha/75"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-mocha/10 bg-crema">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-mocha md:flex-row md:items-center md:justify-between">
+      <div class="flex items-center gap-3">
+        <span class="logo-mark h-10 w-10 rounded-full bg-white p-2 shadow-sm text-roast">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M13 27h38l-2.5 14c-1.8 9.6-9.8 16.5-19.6 16.5S11.1 50.6 9.4 41L13 27Z"></path>
+            <path d="M19 27v10"></path>
+            <path d="M19 37h25"></path>
+            <path d="M29 27v6"></path>
+            <path d="M29 33h16"></path>
+            <path d="M29.5 8.5c6.4-5.7 14.6-3.4 17.3 2.8-6.5 5.8-14.6 3.3-17.3-2.8Z"></path>
+            <path d="M30.4 9.5c4.5 1.3 9.2 2.3 15.3 1.2"></path>
+          </svg>
+        </span>
+        <p>&copy; 2026 Dan Cafe. Great coffee, cozy moments in Maramag.</p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a class="hover:text-caramel" href="#menu">Menu</a>
+        <a class="hover:text-caramel" href="#location">Location</a>
+        <a class="hover:text-caramel" href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggleButton = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileLinks = mobileMenu.querySelectorAll("a");
+    const contactForm = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+
+    toggleButton.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formStatus.textContent = "Thanks. Your message has been noted. Connect this form to your email or backend to receive submissions.";
+      contactForm.reset();
+    });
+  </script>
+</body>
+</html>
